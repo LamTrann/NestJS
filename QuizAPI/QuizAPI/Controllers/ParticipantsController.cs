@@ -23,7 +23,7 @@ namespace QuizAPI.Controllers
         // GET: Participants
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Participants.ToListAsync());
+            return View(await _context.Participants.ToListAsync());
         }
 
         // GET: Participants/Details/5
@@ -59,11 +59,18 @@ namespace QuizAPI.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(participant);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                var temp = _context.Participants.Where(x => x.Name == participant.Name && x.Email == participant.Email).FirstOrDefault();
+                if (temp == default)
+                {
+                    _context.Add(participant);
+                    await _context.SaveChangesAsync();
+                }
+                else
+                {
+                    participant = temp;
+                }
             }
-            return View(participant);
+            return Ok(participant);
         }
 
         // GET: Participants/Edit/5
@@ -149,14 +156,14 @@ namespace QuizAPI.Controllers
             {
                 _context.Participants.Remove(participant);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ParticipantExists(int id)
         {
-          return _context.Participants.Any(e => e.ParticipantId == id);
+            return _context.Participants.Any(e => e.ParticipantId == id);
         }
     }
 }
