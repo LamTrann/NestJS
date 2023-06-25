@@ -4,11 +4,16 @@
   "description": "**NodeJS Step By Step**\r What is node js?\r Node.js is a framework for quickly creating fast and scalable network applications based on Chrome's JavaScript engine.Node. js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient,which is ideal for data-intensive real-time applications that run across multiple devices.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.18.2"
-  }
+    "boostrap": "^2.0.0",
+    "express": "^4.18.2",
+    "lodash": "^4.17.21",
+    "nodemon": "^2.0.22"
+  },
+  "keywords": []
 }
